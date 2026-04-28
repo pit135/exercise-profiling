@@ -15,6 +15,15 @@ Profiling
 ![Profiling after](profilingaf3.png)
 ![Profiling after](profilingaf4.png)
 
+PENJELASAN PERUBAHAN
+Perbedaan hasil di JMeter itu keliatan banget karena saya udah ngerubah cara aplikasi ngambil data dari database. 
+Awalnya, aplikasi itu kena masalah N+1 Query. Jadi, setiap kali ngehit endpoint /all-student, si aplikasi ini bolak-balik ke database berkali-kali cuma buat nyari data kursus 
+tiap mahasiswa satu-satu. Di JMeter, itu efeknya, angka average Response Timenya jadi tinggi (lemot) dan Throughputnya kecil karena server sibuk banget nungguin antrean query ke database yang nggak habis-habis. 
+Nah, setelah optimasi pake join fetch, cara kerjanya aku ubah total, yaitu paksa aplikasi buat ngambil semua data mahasiswa dan kursusnya dalam satu kali query aja. 
+Ibaratnya, kalau dulu belanja ke pasar bolak-balik seratus kali buat beli seratus barang, sekarang sekali jalan langsung bawa truk. Hasilnya di JMeter langsung keliatan, Response Timenya turun drastis 
+(jauh lebih cepat dari target minimal 20%) karena nggak ada lagi waktu yang kebuang buat nunggu koneksi database berulang-ulang. Selain itu, aplikasinya jadi lebih kuat nahan beban banyak user (Throughput naik) 
+karena kerja CPU dan I/O-nya sekarang jauh lebih efisien dan enteng.
+
 REFLECTION
 1. Perbedaan JMeter vs IntelliJ Profiler
    JMeter itu dipakai buat performance testing dari luar aplikasi, misalnya ngetest berapa banyak request yang bisa ditangani server, response time, dll. Fokusnya ke behavior aplikasi secara keseluruhan.
