@@ -15,7 +15,7 @@ Profiling
 ![Profiling after](profilingaf3.png)
 ![Profiling after](profilingaf4.png)
 
-PENJELASAN PERUBAHAN
+PENJELASAN PERUBAHAN  
 Perbedaan hasil di JMeter itu keliatan banget karena saya udah ngerubah cara aplikasi ngambil data dari database. 
 Awalnya, aplikasi itu kena masalah N+1 Query. Jadi, setiap kali ngehit endpoint /all-student, si aplikasi ini bolak-balik ke database berkali-kali cuma buat nyari data kursus 
 tiap mahasiswa satu-satu. Di JMeter, itu efeknya, angka average Response Timenya jadi tinggi (lemot) dan Throughputnya kecil karena server sibuk banget nungguin antrean query ke database yang nggak habis-habis. 
